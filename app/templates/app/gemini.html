@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI</title>
+    <link rel="stylesheet" href="{% static 'app/css/gemini.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+</head>
+<body>
+
+
+    <div class="page-container">
+
+        <button class="back-button" id="back-button" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+            <span class="back-text">Back</span>
+        </button>
+
+        <div class="profile-picture" id="profile-picture">
+            <img src="{{ user.profile.image.url }}" alt="User Profile Picture">
+        </div>
+
+        <div class="chat-messages-container">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message initial-greeting">
+                    <span>Hello</span>
+                    <p class="disclaimer" style="font-size: 1rem;"></p>
+                </div>
+                <!-- Chat messages will appear here -->
+            </div>
+        </div>
+
+        <footer class="chat-input-area">
+            <div class="input-wrapper">
+                <form id="chat-form" class="chat-form">
+                    <input type="text" id="prompt" name="prompt" placeholder="Start describing here" required autocomplete="off">
+                    <button type="submit" id="send-button" aria-label="Send Message">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </form>
+                <!-- <p class="disclaimer">Please describe your reading preferences in detail for the best category recommendations.</p> -->
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/generative-ai/+esm"></script>
+
+    <script src="{% static 'app/js/marked.min.js' %}"></script>
+    <script type="module" src="{% static 'app/js/gemini2.js' %}"></script>
+    <script src="{% static 'app/js/highlight.min.js' %}"></script>
+    <script src="{% static 'app/js/scripts.js' %}"></script>
+
+
+
+
+</body>
+</html>

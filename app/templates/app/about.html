@@ -1,0 +1,357 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+{% block main-content %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 5rem 0;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+        background-size: cover;
+    }
+    
+    .about-hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .about-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        animation: fadeInDown 0.8s ease;
+    }
+    
+    .about-hero p {
+        font-size: 1.3rem;
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto;
+        animation: fadeInUp 0.8s ease;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .about-section {
+        padding: 5rem 0;
+        background: #f8f9fa;
+    }
+    
+    .about-section:nth-child(even) {
+        background: white;
+    }
+    
+    .section-card {
+        background: white;
+        border-radius: 25px;
+        padding: 3rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .section-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .section-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+    }
+    
+    .section-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem auto;
+        font-size: 2.5rem;
+        color: white;
+        animation: pulse 2s ease infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+    
+    .section-content {
+        text-align: center;
+        color: #4a5568;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .stats-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 4rem 0;
+        color: white;
+        margin: 5rem 0;
+    }
+    
+    .stat-box {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .stat-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .value-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+    }
+    
+    .value-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem auto;
+        font-size: 2rem;
+        color: #667eea;
+    }
+    
+    .value-card h4 {
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 1rem;
+    }
+    
+    .value-card p {
+        color: #6c757d;
+        line-height: 1.6;
+        margin: 0;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="about-hero">
+    <div class="container">
+        <div class="about-hero-content">
+            <h1><i class="fas fa-info-circle"></i> About Us</h1>
+            <p>Committed to excellence in dairy production and farmer empowerment</p>
+        </div>
+    </div>
+</div>
+
+<!-- Vision Section -->
+<div class="about-section">
+    <div class="container">
+        <div class="section-card">
+            <div class="section-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="section-title">
+                <h2>Our Vision</h2>
+            </div>
+            <div class="section-content">
+                <p>Our vision is to guarantee consumer satisfaction through the consistent delivery of quality and value. Simultaneously, we aim to empower our farmers, fostering self-dependence and happiness among them.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mission Section -->
+<div class="about-section">
+    <div class="container">
+        <div class="section-card">
+            <div class="section-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="section-title">
+                <h2>Our Mission</h2>
+            </div>
+            <div class="section-content">
+                <p>Our mission is to empower farmers to efficiently produce premium dairy products, establishing ourselves as a cherished brand for consumers, envied by competitors, and valued by shareholders.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-box">
+                    <span class="stat-number"><i class="fas fa-users"></i> 500+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-box">
+                    <span class="stat-number"><i class="fas fa-tractor"></i> 100+</span>
+                    <span class="stat-label">Partner Farmers</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-box">
+                    <span class="stat-number"><i class="fas fa-box"></i> 50+</span>
+                    <span class="stat-label">Products</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-box">
+                    <span class="stat-number"><i class="fas fa-award"></i> 10+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Values Section -->
+<div class="about-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Core Values</h2>
+            <p style="color: #6c757d; font-size: 1.1rem;">The principles that guide everything we do</p>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h4>Quality First</h4>
+                <p>We never compromise on the quality of our products and ensure only the best reaches our customers.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>Farmer Partnership</h4>
+                <p>We believe in empowering farmers and building lasting relationships based on trust and mutual growth.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h4>Sustainability</h4>
+                <p>We are committed to sustainable practices that protect our environment for future generations.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h4>Customer Satisfaction</h4>
+                <p>Your happiness is our success. We strive to exceed expectations with every product and service.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Trust & Transparency</h4>
+                <p>We maintain complete transparency in our operations and build trust through honest practices.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h4>Innovation</h4>
+                <p>We continuously innovate to bring you the best products and improve our processes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}

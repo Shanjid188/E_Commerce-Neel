@@ -13,10 +13,172 @@
     <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
 
+    <style>
+        /* Custom Navbar Styling */
+        .custom-navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .custom-navbar .navbar-brand img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .custom-navbar .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+        
+        .custom-navbar .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .custom-navbar .nav-link:hover {
+            color: #ffd700 !important;
+            transform: translateY(-2px);
+        }
+        
+        .custom-navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #ffd700;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .custom-navbar .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        .custom-navbar .dropdown-menu {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .custom-navbar .dropdown-item {
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-navbar .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffd700;
+            padding-left: 1.5rem;
+        }
+        
+        .custom-navbar .btn-search {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-navbar .btn-search:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+        }
+        
+        .custom-navbar .form-control {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .custom-navbar .form-control:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        }
 
+        /* Custom Footer Styling */
+        .custom-footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0 1rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
+        }
+        
+        .footer-section h4 {
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            line-height: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #ffd700;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .social-icons {
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            line-height: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: #ffd700;
+            transform: translateY(-5px);
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+    </style>
 
-
-    <title>Dairy Products | {% block title %}{% endblock title %}</title>
+    <title> Products | {% block title %}{% endblock title %}</title>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -28,7 +190,8 @@
     <script srcript="{% static 'app/css/all.min.js' %}"></script>
     <script srcript="{% static 'app/css/myscript.js' %}"></script>
 
-    <nav class="navbar navbar-expand-lg navbar-dark  bg-success">
+    <!-- Redesigned Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img src="{% static 'app/images/product/Neel.png' %}" width="70" height="50"/>
@@ -38,82 +201,118 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'chatbot' %}">Chatbot</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Products
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'category' 'ML' %}">Milk</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'CR' %}">Curd</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'MS' %}">Milkshake</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'LS' %}">Lassi</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'GH' %}">Ghee</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'PN' %}">Panner</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'CZ' %}">Cheese</a></li>
-                  <li><a class="dropdown-item" href="{% url 'category' 'IC' %}">Ice-Creams</a></li>
-                  
+                  <li><a class="dropdown-item" href="{% url 'category' 'ML' %}">Cow-ghee</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'CR' %}">cow-milk</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'MS' %}">Milk-Shake</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'LS' %}">Sweet-lassi</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'GH' %}">Tonemilk</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'PN' %}">Paneer-fresh</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'CZ' %}"></a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'IC' %}"></a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">About us</a>
+                <a class="nav-link" href="{% url 'about' %}">About us</a>
               </li>
-
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Contact us</a>
+                <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
               </li>
-              
-             
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" role="search" action="{% url 'search_products' %}">
+              <input class="form-control me-2" type="search" name="q" placeholder="Search products..." aria-label="Search">
+              <button class="btn btn-search" type="submit">Search</button>
             </form>
           </div>
         </div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Shanjid
+                Profile
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="/">Profile</a></li>
-                <li><a class="dropdown-item" href="/">Orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'profile'%}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="#">Change Password</a></li>
                 <li><a class="dropdown-item" href="#">Logout</a></li>
-                
               </ul>
             </li> 
-            <li class="nav-item max-2">
-                <a  href="#" class="nav-link text-white">Cart 4</a>
+            <li class="nav-item mx-2">
+                <a href="{% url 'show_cart' %}" class="nav-link">Cart</a>
             </li>
-            <li class="nav-item max-2">
-                <a  href="#" class="nav-link text-white">Wishlist 4</a>
+            <li class="nav-item mx-2">
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-link">LogOut</a>
+              {% else %}
+              <a href="{% url 'login' %}" class="nav-link">Login</a>
+              {% endif %}
             </li>
-            <li class="nav-item max-2">
-                <a  href="#" class="nav-link text-white">Login</a>
-            </li>
-            <li class="nav-item max-2">
-                <a  href="#" class="nav-link text-white">Registration</a>
+            <li class="nav-item mx-2">
+                <a href="{% url 'customerregistration' %}" class="nav-link">Registration</a>
             </li>  
-
           </ul>
       </nav>
 
-      {% block bannner_slider %}{% endblock bannner_slider %}
+      <div class="content-wrapper">
+          {% block bannner_slider %}{% endblock bannner_slider %}
+          {% block information %}{% endblock information %}
+          {% block main-content %}{% endblock main-content %}
+      </div>
 
-      {% block information %}{% endblock information %}
-
-      {% block main-content %}{% endblock main-content %}
-
-      <footer class="container-fluid fixed-bottom bg-success text-center text-white p-2 mt-5">
-
-        Copyright : 2024 || Amin It Solutions LTD <br> Mohammedpur,Dhaka-1207
-
+      <!-- Redesigned Footer -->
+      <footer class="custom-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>OS Ventures LTD provides premium quality dairy products. We are committed to delivering fresh and healthy products to our customers.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="/">Home</a></p>
+                    <p><a href="{% url 'about' %}">About Us</a></p>
+                    <p><a href="{% url 'contact' %}">Contact Us</a></p>
+                    <p><a href="#">Terms & Conditions</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <p><a href="{% url 'category' 'ML' %}">Cow Ghee</a></p>
+                    <p><a href="{% url 'category' 'CR' %}">Cow Milk</a></p>
+                    <p><a href="{% url 'category' 'MS' %}">Milk Shake</a></p>
+                    <p><a href="{% url 'category' 'PN' %}">Paneer Fresh</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i>Address: House#70 Road#03 ,Mohammadia Housing Limited, Mohammadpur ,Dhaka-1207</p>
+                    <p><i class="fas fa-phone"></i> +880 01743780943</p>
+                    <p><i class="fas fa-envelope"></i> info@osventures.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 OS Ventures LTD. All Rights Reserved.</p>
+            </div>
+        </div>
       </footer>
-
 
 </body>
 </html>

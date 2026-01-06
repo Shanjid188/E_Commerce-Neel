@@ -1,0 +1,41 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'app/css/search_result.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Search Results for "{{ query }}"</h2>
+        {% if search_results %}
+            <ul>
+                {% for item in search_results %}
+                    <li>
+                        {% if item.item_type|lower == 'home' %}
+                            
+                                <img src="{{ item.Product_image.url }}" alt="{{ item.title }}" class="product-image" width="150"><br>
+                            
+                            <strong>Title:</strong> {{ item.title }}<br> 
+                            <strong>Price:</strong>{{ item.discounted_price }}<br> 
+                        {% endif %}
+
+                        {% if item.item_type|lower == 'home' %}
+                            <a href="{% url 'product-detail' item.id %}" class="view-details-link">View Details</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found for "{{ query }}"</p>
+        {% endif %}
+        <div class="text-center">
+            <a href="javascript:history.back()" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </a>
+        </div>
+</body>
+</html>
