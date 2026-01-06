@@ -13,7 +13,6 @@ E-Commerce Neel is a simple **e-commerce web application** built using **Django 
 - Shopping cart functionality (basic or planned for future implementation).
 - Admin panel for managing products.
 - Fully responsive frontend layout using HTML, CSS, and JavaScript.
-<img width="1880" height="855" alt="image" src="https://github.com/user-attachments/assets/dc1e0fd5-fcf3-4472-90f0-46c595a39c11" />
 ---
 
 ## 💻 Tech Stack
